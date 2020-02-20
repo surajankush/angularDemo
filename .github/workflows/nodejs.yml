@@ -20,3 +20,7 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
     - run: ls -l
+    - uses: actions/upload-artifact@v1
+      with:
+       name: nodePkg.zip
+       path: .
