@@ -19,7 +19,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
     #- run: npm install
     #- run: npm run build --if-present
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v2 
+      with:
+        token: ${{secrets.github_token}}  
     - run: ls -l
+    - run: rm buildNo.json
+    - run: echo "{buildNo:${{ steps.buildnumber.outputs.build_number }} }" > buildNo.json  
     - uses: actions/upload-artifact@v1
       with:
        name: nodePkg.zip
